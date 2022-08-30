@@ -1,0 +1,47 @@
+
+.header{
+    display: flex;
+    text-align: center;
+    padding: 30px 15px;
+}
+.header__title{
+    font-size: 35px;
+    padding: 20px 0;
+}
+.header__block{
+    border-radius: 5px;
+    padding: 30px 15px;
+    display: flex;
+    gap: 30px;
+    background: cornflowerblue;
+}
+.header__choice{
+
+}
+.header__subtext{
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: aliceblue;
+}
+.header__rates{
+    padding: 5px 8px;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 5px;
+    border: 1px solid blueviolet;
+}
+
+.header__input{
+    border: 1px solid blueviolet;
+    border-radius: 5px;
+    padding: 5px 8px;
+    text-align: center;
+    font-size: 30px;
+}
+.header__input:focus,
+.header__rates:focus{
+    box-shadow:
+    0 -1px 1px rgba(33, 41, 34, 0.4),
+    0 0  0 2px rgb(255,255,255),
+    0.3em 0.3em 5px rgba(33, 41, 34, 0.4);
+}
