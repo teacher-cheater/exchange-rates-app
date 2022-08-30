@@ -1,10 +1,28 @@
 import s from './header.module.css';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 function App() {
 
     let [inputTextValue, setInputTextValue] = useState('');
+    let [curentcy, setCurentcy] = useState([]);
     let [, setSelectOpinion] = useState('');
+    let [todayDate, setTodayDate] = useState([])
+
+    const mainUrl = 'https://www.cbr-xml-daily.ru/latest.js';
+
+    useEffect(() => {
+    fetch(mainUrl)
+        .then(response => response.json())
+        .then(data => setCurentcy([data.base]))
+        // .then(res => console.log(res))
+    }, []);
+
+    useEffect(() => {
+        fetch(mainUrl)
+            .then(response => response.json())
+            // .then(res => setTodayDate([res.date]))
+            .then(res=> console.log(res))
+    }, []);
 
     return (
         <div className="App">
@@ -16,13 +34,7 @@ function App() {
                             <div className={s.header__subtext}> Choice rates </div>
                             <select name="rates" className={s.header__rates}
                                     onChange={(event) => setSelectOpinion(event.target.value)}>
-                                <option value="" defaultValue >
-                                    Choose one
-                                </option>
-                                <option value="Gryffindor"> Gryffindor</option>
-                                <option value="Slytherin">Slytherin</option>
-                                <option value="Hufflepuff">Hufflepuff</option>
-                                <option value="Ravenclaw">Ravenclaw</option>
+                                <option value=''>{curentcy}</option>
                             </select>
                         </label>
                         <label className={s.header__inpt}>
@@ -36,33 +48,8 @@ function App() {
                             />
                         </label>
                     </div>
-
-                    <div className="header__block-choice-2">
-                        {/*<label className="header__school-choice">*/}
-                        {/*    <p>School</p>*/}
-                        {/*    <select name="school" className="header__school"*/}
-                        {/*            onChange={(event) => setSelectOpinion(event.target.value)}>*/}
-                        {/*        <option value="" defaultValue select='true'>*/}
-                        {/*            Choose one*/}
-                        {/*        </option>*/}
-                        {/*        <option value="Gryffindor"> Gryffindor</option>*/}
-                        {/*        <option value="Slytherin">Slytherin</option>*/}
-                        {/*        <option value="Hufflepuff">Hufflepuff</option>*/}
-                        {/*        <option value="Ravenclaw">Ravenclaw</option>*/}
-                        {/*    </select>*/}
-                        {/*</label>*/}
-                        {/*<label className="header__name">*/}
-                        {/*    <p>Name</p>*/}
-                        {/*    <input*/}
-                        {/*        placeholder="100.00"*/}
-                        {/*        className="header__input-text"*/}
-                        {/*        type="number"*/}
-                        {/*        value={inputTextValue}*/}
-                        {/*        onChange={(event) => setInputTextValue(event.target.value)}*/}
-                        {/*    />*/}
-                        {/*</label>*/}
-                    </div>
                 </form>
+                <div className={s.main__date}>{todayDate}</div>
             </header>
         </div>
     );

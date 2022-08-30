@@ -45,3 +45,10 @@
     0 0  0 2px rgb(255,255,255),
     0.3em 0.3em 5px rgba(33, 41, 34, 0.4);
 }
+
+.main__date{
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #000;
+}
