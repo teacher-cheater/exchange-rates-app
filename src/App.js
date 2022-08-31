@@ -5,19 +5,14 @@ import {CurrencyItems} from './components/CurrencyItems/CurrencyItems.jsx'
 
 function App() {
 
-    let [inputTextValue, setInputTextValue] = useState('');
-    // let [inputTextValue2, setInputTextValue2] = useState('');
-
-    let [currency, setCurrency] = useState([]);
-    let [baseCurrency, setBaseCurrency] = useState();
-    let [convertibleCurrency, setConvertibleCurrency] = useState([]);
+    const [currency, setCurrency] = useState([]);
+    const [baseCurrency, setBaseCurrency] = useState();
+    const [convertibleCurrency, setConvertibleCurrency] = useState();
+    const [todayDate, setTodayDate] = useState([]);
 
 
-    // let [, setSelectOpinion] = useState('');
-    let [todayDate, setTodayDate] = useState([])
 
     const mainUrl = 'https://www.cbr-xml-daily.ru/latest.js';
-    console.log(currency)
 
     //запрос на отображение базовой валюты
     useEffect(() => {
@@ -42,20 +37,19 @@ function App() {
             <header>
                 <h1 className={s.header__title}> Exchange rates </h1>
                 <CurrencyItems
-                    inputTextValue={inputTextValue}
-                    setInputTextValue={setInputTextValue}
                     currency={currency}
-                    setCurrency={setCurrency}
-                    baseCurrency={baseCurrency}
+                    // setCurrency={setCurrency}
+                    selectCurrency={baseCurrency}
+                    onChangeCurrency={(event => setBaseCurrency(event.target.value))}
                 >
 
                 </CurrencyItems>
+
                 <CurrencyItems
-                    inputTextValue={inputTextValue}
-                    setInputTextValue={setInputTextValue}
                     currency={currency}
-                    setCurrency={setCurrency}
-                    convertibleCurrency={convertibleCurrency}
+                    // setCurrency={setCurrency}
+                    selectCurrency={convertibleCurrency}
+                    onChangeCurrency={(event => setConvertibleCurrency(event.target.value))}
                 >
 
                 </CurrencyItems>

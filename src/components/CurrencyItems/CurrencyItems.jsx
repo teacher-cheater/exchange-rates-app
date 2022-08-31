@@ -2,18 +2,21 @@ import s from "../../header.module.css";
 
 
 export function CurrencyItems({
-      inputTextValue,
-      setInputTextValue,
+      onChangeCurrency,
       currency,
-      baseCurrency,
-      convertibleCurrency
+      selectCurrency
     }){
     return(
     <form className={s.header}>
         <div className={s.header__block}>
             <label className={s.header__choice}>
                 {/*value = базовой значение валюты - рубль*/}
-                <select value={baseCurrency} name="rates" className={s.header__rates}>
+                <select
+                    value={selectCurrency}
+                    name="rates"
+                    className={s.header__rates}
+                    onChange={onChangeCurrency}
+                >
                     {/*перебор и добавление стран в выпадющий список*/}
                     {currency.map(select => (
                         <option key={select} value={select}>{select}</option>
@@ -25,8 +28,8 @@ export function CurrencyItems({
                     placeholder="100.00"
                     className={s.header__input}
                     type="number"
-                    value=''
-                    onChange={(event) => convertibleCurrency(event.target.value)}
+                    value={onChangeCurrency}
+
                 />
             </label>
         </div>
