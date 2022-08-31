@@ -8,8 +8,9 @@ function App() {
     const [currency, setCurrency] = useState([]);
     const [baseCurrency, setBaseCurrency] = useState();
     const [convertibleCurrency, setConvertibleCurrency] = useState();
+    const [currencyExchange, setCurrencyExchange] = useState()
+    console.log(currencyExchange)
     const [todayDate, setTodayDate] = useState([]);
-
 
 
     const mainUrl = 'https://www.cbr-xml-daily.ru/latest.js';
@@ -19,18 +20,15 @@ function App() {
     fetch(mainUrl)
         .then(response => response.json())
         .then(data => {
+            const currency = Object.keys(data.rates)[0]
+            setTodayDate([data.date])
             setCurrency([data.base, ...Object.keys(data.rates)])
             setBaseCurrency(data.base)
-            setConvertibleCurrency(Object.keys(data.rates)[0])
+            setConvertibleCurrency(currency)
+            setCurrencyExchange(data.rates[currency])
         })
     }, []);
 
-    //запрос на отображение даты
-    useEffect(() => {
-        fetch(mainUrl)
-            .then(response => response.json())
-            .then(res => setTodayDate([res.date]))
-    }, []);
 
     return (
         <div className="App">

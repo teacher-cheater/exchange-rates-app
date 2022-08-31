@@ -28,7 +28,6 @@ export function CurrencyItems({
                     placeholder="100.00"
                     className={s.header__input}
                     type="number"
-                    value={onChangeCurrency}
 
                 />
             </label>
