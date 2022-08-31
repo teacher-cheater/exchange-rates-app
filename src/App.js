@@ -9,20 +9,25 @@ function App() {
     // let [inputTextValue2, setInputTextValue2] = useState('');
 
     let [currency, setCurrency] = useState([]);
-    // let [currencySelect, setCurrencySelect] = useState([]);
+    let [baseCurrency, setBaseCurrency] = useState();
+    let [convertibleCurrency, setConvertibleCurrency] = useState([]);
+
 
     // let [, setSelectOpinion] = useState('');
     let [todayDate, setTodayDate] = useState([])
 
     const mainUrl = 'https://www.cbr-xml-daily.ru/latest.js';
-    // const mainUrl = 'https://cdn.cur.su/api/latest.json';
-    console.log(setCurrency)
+    console.log(currency)
 
     //запрос на отображение базовой валюты
     useEffect(() => {
     fetch(mainUrl)
         .then(response => response.json())
-        .then(data => setCurrency([data.base, ...Object.keys(data.rates)]))
+        .then(data => {
+            setCurrency([data.base, ...Object.keys(data.rates)])
+            setBaseCurrency(data.base)
+            setConvertibleCurrency(Object.keys(data.rates)[0])
+        })
     }, []);
 
     //запрос на отображение даты
@@ -30,7 +35,6 @@ function App() {
         fetch(mainUrl)
             .then(response => response.json())
             .then(res => setTodayDate([res.date]))
-            // .then(res=> console.log([Object.keys(res.rates)][0]))
     }, []);
 
     return (
@@ -42,6 +46,7 @@ function App() {
                     setInputTextValue={setInputTextValue}
                     currency={currency}
                     setCurrency={setCurrency}
+                    baseCurrency={baseCurrency}
                 >
 
                 </CurrencyItems>
@@ -50,6 +55,7 @@ function App() {
                     setInputTextValue={setInputTextValue}
                     currency={currency}
                     setCurrency={setCurrency}
+                    convertibleCurrency={convertibleCurrency}
                 >
 
                 </CurrencyItems>
